@@ -1,5 +1,7 @@
 import openai
 import random
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 def generate_summation_equations(n):
     equations = []
@@ -25,7 +27,7 @@ def LLM(prompts):
     )
     return response
 
-n = 1000
+n = 100
 equation_list = generate_summation_equations(n)
 all_responses = []
 
@@ -36,11 +38,13 @@ messages = [{"role": "system", "content": "You are a helpful assistant."}]
 for i in range(0, len(equation_list), batch_size):
     batch = equation_list[i:i + batch_size]
     for equation in batch:
-        messages.append({"role": "user", "content": f"Calculate {equation}"})
+        messages.append({"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": f"Calculate {equation}. "})
     
     response = LLM(messages)
     all_responses.append(response.choices[0].message.content)
-    messages = [{"role": "system", "content": "You are a helpful assistant."}]
-
+    # messages = [{"role": "system", "content": "You are a helpful assistant."}]
+    
 for resp in all_responses:
-    print("Response:", resp)
+    print("Response:", resp.encode('utf-8', errors='ignore').decode('utf-8'))
+# for resp in all_responses:
+#     print("Response:", resp)
