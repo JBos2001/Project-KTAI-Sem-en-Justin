@@ -38,11 +38,12 @@ messages = [{"role": "system", "content": "You are a helpful assistant."}]
 for i in range(0, len(equation_list), batch_size):
     batch = equation_list[i:i + batch_size]
     for equation in batch:
-        messages.append({"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": f"Calculate {equation}. "})
+        messages.append( {"role": "user", "content": f"Calculate {equation}. Only give me the result answer. For an example, if I ask 'what is 1+2?', your answer should just be '3' "})
     
     response = LLM(messages)
     all_responses.append(response.choices[0].message.content)
-    # messages = [{"role": "system", "content": "You are a helpful assistant."}]
+    messages = [{"role": "system", "content": "You are a helpful assistant."}]
+    
     
 for resp in all_responses:
     print("Response:", resp.encode('utf-8', errors='ignore').decode('utf-8'))
