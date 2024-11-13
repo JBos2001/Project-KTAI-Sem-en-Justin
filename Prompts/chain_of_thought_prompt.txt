@@ -1,0 +1,2 @@
+Given an equasion like (3 + 2) * 10 - 7. First solve the part between the pharenthesees: (3 + 2) = 5. Then perform the multiplication: 5 * 10 = 50. Finally subtract the last number: 50 - 7 = 43. The result is 43.
+What is the result of the following equasion: [equasion] ?
